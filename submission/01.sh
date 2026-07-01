@@ -1,2 +1,4 @@
 # Create a wallet with the name "btrustwallet".
-bitcoin-cli -regtest createwallet "btrustwallet" > /dev/null  2>&1 || true
+RESPONSE=$(bitcoin-cli -regtest createwallet "btrustwallet" 2>/dev/null || bitcoin-cli -regtest loadwallet "btrustwallet" 2>/dev/null)
+
+echo "$RESPONSE" | jq -r '.name'
